@@ -1,5 +1,5 @@
 require('dotenv').config()
-require('./src/database/connection')
+require('./src/database/connections/connection')
 
 const fs = require("fs")
 const path = require("path")
@@ -27,8 +27,11 @@ fs.readdirSync(path.resolve('src/routes'))
     });
 
 
-const {APP_PORT: port = 3000, APP_HOST: host = 'localhost'} = process.env;
+const {APP_MODE: mode = 'production', APP_PORT: port = 3000, APP_HOST: host = 'localhost'} = process.env;
 
-server.listen(port, host, function () {
-    console.log(`********** Server is running on  http://${host}:${port}  **********`)
-});
+mode==='development'? require('kill-port')(port): new Promise(resolve => resolve())
+    .finally(function () {
+        server.listen(port, host, function () {
+            console.log(`********** Server is running on  http://${host}:${port}  **********`)
+        })
+    });
