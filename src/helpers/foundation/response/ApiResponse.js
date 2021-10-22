@@ -1,5 +1,4 @@
 class ApiResponse {
-    // parent = ApiResponse
 
     errorRes(res, err = null, errMsg='operation failed', status = 500) {
         if(err) console.error(err)
