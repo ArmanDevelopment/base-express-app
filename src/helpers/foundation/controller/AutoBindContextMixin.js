@@ -1,6 +1,6 @@
 const {isFunction} = require("../utils/isFunction");
 
-const AutoBindContext = mix => class AutoBindContext extends mix {
+const AutoBindContextMixin = mix => class AutoBindContext extends mix {
     constructor() {
         super();
         return new Proxy(this, {
@@ -20,4 +20,4 @@ const AutoBindContext = mix => class AutoBindContext extends mix {
     }
 }
 
-module.exports = AutoBindContext
+module.exports = AutoBindContextMixin

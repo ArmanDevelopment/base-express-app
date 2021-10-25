@@ -1,3 +1,4 @@
+require('dotenv').config()
 const {DB_CONNECTION: connection} = process.env
 
-require(`./${connection}/dbConnection`).connect()
+module.exports = require(`./${connection}/dbConnection`).connect()

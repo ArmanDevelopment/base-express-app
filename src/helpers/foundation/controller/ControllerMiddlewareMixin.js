@@ -1,7 +1,7 @@
 const {isConditionalMiddleware, getHandler, combine} = require("../middlewares/MiddlewareHelper");
 const {isFunction} = require("../utils/isFunction");
 
-const ControllerMiddleware = mix => class ControllerMiddleware extends mix{
+const ControllerMiddlewareMixin = mix => class ControllerMiddleware extends mix{
     _middlewares = [];
 
     constructor() {
@@ -27,4 +27,4 @@ const ControllerMiddleware = mix => class ControllerMiddleware extends mix{
     }
 }
 
-module.exports = ControllerMiddleware
+module.exports = ControllerMiddlewareMixin

@@ -1,14 +1,14 @@
 
-const ControllerParent = mix => class ControllerParent extends mix{
+const ControllerParentMixin = mix => class ControllerParent extends mix{
     _parent;
     get parent () {
         return this._parent
     }
     set _setParent(parent) {
-        if(new parent instanceof ControllerParent)
+        if(new parent instanceof ControllerParentMixin)
             return  this._parent = parent;
 
-        throw new TypeError('the parent must inherit from the ControllerParent or its descendants')
+        throw new TypeError('the parent must inherit from the ControllerParentMixin or its descendants')
     }
     static buildController(... args) {
         let controller = new this(... args)
@@ -18,4 +18,4 @@ const ControllerParent = mix => class ControllerParent extends mix{
     }
 }
 
-module.exports = ControllerParent
+module.exports = ControllerParentMixin

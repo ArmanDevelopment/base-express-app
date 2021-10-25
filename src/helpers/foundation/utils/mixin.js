@@ -1,7 +1,7 @@
-function mixin (mixins = []) {
+function mixin (mixins = [], SupperParent = Object) {
     return mixins.reduce((A, B) => function (C) {
         return class extends A(B(C)) {}
-    })(Object)
+    })(SupperParent)
 }
 
 module.exports = {mixin}
