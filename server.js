@@ -23,15 +23,25 @@ app.use (bodyParser.urlencoded({extended: true}))
 fs.readdirSync(path.resolve('src/routes'))
     .filter(file => file.match(/\.js$/) !== null)
     .forEach(file => {
-        app.use (require (path.join(__dirname, 'src/routes', file)));
+        app.use (... require (path.join(__dirname, 'src/routes', file)));
     });
 
 
+// app.get("/x", (req, res, next) => {
+//     next(new Error("error message"))
+// })
+
+app.use((err, req, res, next) => {
+    console.log("handler");
+    res.send(err.message)
+})
+
 const {APP_MODE: mode = 'production', APP_PORT: port = 3000, APP_HOST: host = 'localhost'} = process.env;
 
-mode==='development'? require('kill-port')(port): new Promise(resolve => resolve())
+mode==='development' ? require('kill-port')(port): new Promise(resolve => resolve())
     .finally(function () {
         server.listen(port, host, function () {
             console.log(`********** Server is running on  http://${host}:${port}  **********`)
+
         })
     });

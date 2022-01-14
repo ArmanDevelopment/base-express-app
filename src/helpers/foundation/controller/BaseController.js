@@ -1,15 +1,14 @@
 const AutoBindContext = require('./AutoBindContextMixin')
 const ControllerMiddleware = require('./ControllerMiddlewareMixin')
-const ControllerParent = require('./ControllerParentMixin')
 const {mixin} = require('../utils/mixin')
 
-const apiResponse = require('../response/ApiResponse')
+const _apiResponse = require('../response/ApiResponse')
 
-class BaseController extends mixin([ControllerParent, ControllerMiddleware, AutoBindContext]) {
-    constructor({apiResponse = apiResponse} = {}) {
+class BaseController extends mixin([/*ControllerMiddleware,*/ AutoBindContext]) {
+    constructor({apiResponse = _apiResponse} = {}) {
         super();
         this.apiResponse = apiResponse
     }
 }
 
-module.exports = BaseController.buildController()
+module.exports = BaseController

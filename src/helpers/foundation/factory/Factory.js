@@ -8,7 +8,7 @@ class Factory extends factory.FakerInstance {
     }
 
     direction (faker) {
-        return {}
+        throw new Error("Method not implemented")    
     }
 
     count(quantity = 1) {
