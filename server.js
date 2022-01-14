@@ -31,10 +31,7 @@ fs.readdirSync(path.resolve('src/routes'))
 //     next(new Error("error message"))
 // })
 
-app.use((err, req, res, next) => {
-    console.log("handler");
-    res.send(err.message)
-})
+app.use(require("./src/handlers/ErrorHandler").handler)
 
 const {APP_MODE: mode = 'production', APP_PORT: port = 3000, APP_HOST: host = 'localhost'} = process.env;
 
@@ -42,6 +39,5 @@ mode==='development' ? require('kill-port')(port): new Promise(resolve => resolv
     .finally(function () {
         server.listen(port, host, function () {
             console.log(`********** Server is running on  http://${host}:${port}  **********`)
-
         })
     });

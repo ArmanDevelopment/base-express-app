@@ -10,7 +10,6 @@
                             try {
                                 await instance[target].call(instance, req, res, next)
                             } catch (error) {
-                                console.log(111);
                                 next(error)
                             }
                         }
@@ -19,7 +18,7 @@
                 },
                 set: (instance, target, value) => {
                     if(isFunction(value))
-                        throw new TypeError('fields of the controller cannot be assigned functions')
+                        throw new TypeError('proprtys of the controller cannot be assigned functions')
 
                     return instance[target] = value
                 }
